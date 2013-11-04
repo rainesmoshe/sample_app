@@ -1,52 +1,33 @@
 require 'spec_helper'
 
 describe "Static Pages" do
-  describe "Home Page" do
-    it "should have the h1 'home'" do
-      visit '/static_pages/home'
-      page.should have_selector('h1', :text=>'home')
-    end
 
-     it "should have the title 'home'" do
-     visit '/static_pages/home'
-     page.should have_selector('title', 
-     :text=>"Ruby on rails tutorial sample App | home")
-     end
-  end
+	subject { page }
+	
+	describe "Home page" do
+		before{visit root_path}
+		it{should have_selector('h1', text: 'Welcom to the Sample App')}
+		it{should have_selector('title', text: full_title(''))}
+		it{should_not have_selector 'title', text: '| Home'}
+	end
+	
+	describe "Help page" do
+		before{visit help_path}
+		it{should have_selector('h1', text: 'Help')}
+		it{should have_selector('title', text: full_title('Help'))}
+	end
+	
+	describe "About page" do
+		before{visit about_path}
+		it{should have_selector('h1', text: 'About')}
+		it{should have_selector('title', text: full_title('About'))}
+	end
 
-
-  describe "Help Page" do
-    it "should have the content 'help'" do
-      visit '/static_pages/help'
-      page.should have_content('help')            
-    end
-     it "should have the h1 'help'" do
-      visit '/static_pages/help'
-      page.should have_selector('h1', :text=>'help')
-    end
-
-     it "should have the title 'help'" do
-     visit '/static_pages/help'
-     page.should have_selector('title', 
-     :text=>"Ruby on rails tutorial sample App | help")
-     end
-  end
+	describe "Contact page" do
+		before{visit contact_path}
+		it{should have_selector('h1', text: 'Contact')}
+		it{should have_selector('title', text: full_title('Contact'))}
+	end
 
 
-  describe "About Page" do
-    it "should have the content 'about'" do
-	visit '/static_pages/about'
- 	page.should have_content('about')
-   end
-   it "should have the h1 'about'" do
-      visit '/static_pages/about'
-      page.should have_selector('h1', :text=>'about')
-    end
-
-     it "should have the title 'Ruby on rails tutorial sample App | about'" do
-     visit '/static_pages/about'
-     page.should have_selector('title', 
-     :text=>"Ruby on rails tutorial sample App | about")
-     end
- end
 end
